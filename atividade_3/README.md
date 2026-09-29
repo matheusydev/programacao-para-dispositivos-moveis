@@ -1,17 +1,83 @@
-# atividade_3
+# Navegação entre Páginas - Atividade 3
 
-A new Flutter project.
+Aplicação desenvolvida em Flutter para prática de navegação entre telas, utilizando o `Navigator` para gerenciar as páginas como uma pilha, com os métodos `push()` e `pop()`, e posteriormente com rotas nomeadas.
 
-## Getting Started
+## Requisitos da Atividade
 
-This project is a starting point for a Flutter application.
+1. **Navegação com `push()` e `pop()`**
+   * Criação de duas páginas: `PrimeiraPagina` e `SegundaPagina`.
+   * Navegação para a segunda página com `Navigator.push()` e `MaterialPageRoute`.
+   * Retorno à página anterior com `Navigator.pop()`.
 
-A few resources to get you started if this is your first Flutter project:
+2. **Título da página no `AppBar`**
+   * Cada página recebe seu título pelo construtor e o exibe no `AppBar`.
+   * Título centralizado e cor de fundo diferente em cada página.
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+3. **Navegação com rotas nomeadas**
+   * Registro das rotas no `MaterialApp` com `initialRoute` e `routes`.
+   * Página raiz definida na rota `'/'` e segunda página na rota `'/segunda'`.
+   * Navegação com `Navigator.pushNamed()`.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Tecnologias Utilizadas
+
+* Flutter (SDK)
+* Dart
+* Material Design 3
+
+## Plataformas Suportadas
+
+* Android
+* Web
+
+## Pré-requisitos
+
+* [Flutter SDK](https://docs.flutter.dev/get-started/install) instalado e configurado
+* Emulador Android, dispositivo físico ou navegador disponível
+
+## Como Executar
+
+1. Clone o repositório e acesse a pasta do projeto:
+
+   ```bash
+   cd atividade_3
+   ```
+
+2. Instale as dependências:
+
+   ```bash
+   flutter pub get
+   ```
+
+3. Execute o aplicativo:
+
+   ```bash
+   flutter run
+   ```
+
+## Estrutura de Pastas
+
+```
+lib/
+├── main.dart                  # MaterialApp com tema e rotas
+└── pages/
+    ├── primeira_pagina.dart   # Página inicial (rota '/')
+    └── segunda_pagina.dart    # Segunda página (rota '/segunda')
+```
+
+## Estrutura do App
+
+```
+MaterialApp
+├── initialRoute: '/'
+└── routes
+    ├── '/' → PrimeiraPagina
+    │   └── Scaffold
+    │       ├── AppBar ("Primeira Página")
+    │       └── Body
+    │           └── ElevatedButton → Navigator.pushNamed('/segunda')
+    └── '/segunda' → SegundaPagina
+        └── Scaffold
+            ├── AppBar ("Segunda Página")
+            └── Body
+                └── ElevatedButton → Navigator.pop()
+```
