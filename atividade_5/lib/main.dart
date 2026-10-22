@@ -23,6 +23,8 @@ class TelaLista extends StatefulWidget {
 class _TelaListaState extends State<TelaLista> {
   List<Contato> _contatos = [];
 
+  final _buscaController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
@@ -30,7 +32,11 @@ class _TelaListaState extends State<TelaLista> {
   }
 
   Future<void> _carregar() async {
-    final lista = await BancoHelper.listar();
+    final termo = _buscaController.text.trim();
+
+    final lista = termo.isEmpty
+        ? await BancoHelper.listar()
+        : await BancoHelper.buscar(termo);
 
     if (!mounted) return;
 
@@ -58,10 +64,16 @@ class _TelaListaState extends State<TelaLista> {
       ),
     );
 
-    if (confirmou == true) {
+    if (confirmou == true && contato.id != null) {
       await BancoHelper.excluir(contato.id!);
       await _carregar();
     }
+  }
+
+  @override
+  void dispose() {
+    _buscaController.dispose();
+    super.dispose();
   }
 
   @override
@@ -70,35 +82,53 @@ class _TelaListaState extends State<TelaLista> {
       appBar: AppBar(
         title: const Text('Agenda de Contatos'),
       ),
-      body: ListView.builder(
-        itemCount: _contatos.length,
-        itemBuilder: (context, i) {
-          final c = _contatos[i];
-
-          return ListTile(
-            title: Text(c.nome),
-            subtitle: Text(c.email),
-            onTap: () async {
-              final salvou = await Navigator.push<bool>(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => TelaFormulario(contato: c),
-                ),
-              );
-
-              if (salvou == true) {
-                await _carregar();
-              }
-            },
-            trailing: IconButton(
-              icon: const Icon(
-                Icons.delete,
-                color: Colors.red,
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(12),
+            child: TextField(
+              controller: _buscaController,
+              decoration: const InputDecoration(
+                hintText: 'Buscar por nome ou e-mail',
+                prefixIcon: Icon(Icons.search),
+                border: OutlineInputBorder(),
               ),
-              onPressed: () => _confirmarExclusao(c),
+              onChanged: (_) => _carregar(),
             ),
-          );
-        },
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: _contatos.length,
+              itemBuilder: (context, i) {
+                final c = _contatos[i];
+
+                return ListTile(
+                  title: Text(c.nome),
+                  subtitle: Text(c.email),
+                  onTap: () async {
+                    final salvou = await Navigator.push<bool>(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => TelaFormulario(contato: c),
+                      ),
+                    );
+
+                    if (salvou == true) {
+                      await _carregar();
+                    }
+                  },
+                  trailing: IconButton(
+                    icon: const Icon(
+                      Icons.delete,
+                      color: Colors.red,
+                    ),
+                    onPressed: () => _confirmarExclusao(c),
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
