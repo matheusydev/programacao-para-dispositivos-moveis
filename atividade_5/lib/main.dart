@@ -53,6 +53,18 @@ class _TelaListaState extends State<TelaLista> {
           return ListTile(
             title: Text(c.nome),
             subtitle: Text(c.email),
+            onTap: () async {
+              final salvou = await Navigator.push<bool>(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => TelaFormulario(contato: c),
+                ),
+              );
+
+              if (salvou == true) {
+                await _carregar();
+              }
+            },
           );
         },
       ),
@@ -76,7 +88,9 @@ class _TelaListaState extends State<TelaLista> {
 }
 
 class TelaFormulario extends StatefulWidget {
-  const TelaFormulario({super.key});
+  final Contato? contato;
+
+  const TelaFormulario({super.key, this.contato});
 
   @override
   State<TelaFormulario> createState() => _TelaFormularioState();
@@ -86,13 +100,28 @@ class _TelaFormularioState extends State<TelaFormulario> {
   final _nomeController = TextEditingController();
   final _emailController = TextEditingController();
 
+  @override
+  void initState() {
+    super.initState();
+
+    if (widget.contato != null) {
+      _nomeController.text = widget.contato!.nome;
+      _emailController.text = widget.contato!.email;
+    }
+  }
+
   Future<void> _salvar() async {
     final contato = Contato(
+      id: widget.contato?.id,
       nome: _nomeController.text,
       email: _emailController.text,
     );
 
-    await BancoHelper.inserir(contato);
+    if (widget.contato == null) {
+      await BancoHelper.inserir(contato);
+    } else {
+      await BancoHelper.atualizar(contato);
+    }
 
     if (!mounted) return;
 
@@ -108,9 +137,13 @@ class _TelaFormularioState extends State<TelaFormulario> {
 
   @override
   Widget build(BuildContext context) {
+    final editando = widget.contato != null;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Novo contato'),
+        title: Text(
+          editando ? 'Editar contato' : 'Novo contato',
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -132,7 +165,9 @@ class _TelaFormularioState extends State<TelaFormulario> {
             const SizedBox(height: 24),
             ElevatedButton(
               onPressed: _salvar,
-              child: const Text('Salvar'),
+              child: Text(
+                editando ? 'Salvar alterações' : 'Salvar',
+              ),
             ),
           ],
         ),
