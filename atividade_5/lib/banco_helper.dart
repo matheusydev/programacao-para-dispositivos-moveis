@@ -49,4 +49,22 @@ class BancoHelper {
     );
     return linhas.map((l) => Contato.fromMap(l)).toList();
   }
+
+  // UPDATE - altera um contato existente
+  static Future<int> atualizar(Contato contato) async {
+    final db = await _openBanco();
+    return db.update(
+      tabela,
+      contato.toMap(),
+      where: 'id = ?',
+      whereArgs: [contato.id],
+    );
+  }
+
+  // DELETE - exclui um contato pelo id.
+  static Future<int> excluir(int id) async {
+    final db = await _openBanco();
+    return db.delete(tabela, where: 'id = ?', whereArgs: [id]);
+  }
+
 }
