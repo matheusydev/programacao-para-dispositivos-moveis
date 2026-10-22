@@ -1,10 +1,19 @@
+import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 import 'banco_helper.dart';
 import 'contato.dart';
 
 void main() {
+  // No Windows/Linux, usa o SQLite via FFI.
+  // No Android/iOS, o sqflite normal funciona sozinho.
+  if (Platform.isWindows || Platform.isLinux) {
+    sqfliteFfiInit();
+    databaseFactory = databaseFactoryFfi;
+  }
+
   runApp(
     const MaterialApp(
       debugShowCheckedModeBanner: false,
