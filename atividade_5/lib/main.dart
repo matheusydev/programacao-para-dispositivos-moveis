@@ -39,6 +39,31 @@ class _TelaListaState extends State<TelaLista> {
     });
   }
 
+  Future<void> _confirmarExclusao(Contato contato) async {
+    final confirmou = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('Excluir contato'),
+        content: Text('Deseja excluir ${contato.nome}?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, false),
+            child: const Text('Cancelar'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, true),
+            child: const Text('Excluir'),
+          ),
+        ],
+      ),
+    );
+
+    if (confirmou == true) {
+      await BancoHelper.excluir(contato.id!);
+      await _carregar();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,6 +90,13 @@ class _TelaListaState extends State<TelaLista> {
                 await _carregar();
               }
             },
+            trailing: IconButton(
+              icon: const Icon(
+                Icons.delete,
+                color: Colors.red,
+              ),
+              onPressed: () => _confirmarExclusao(c),
+            ),
           );
         },
       ),
