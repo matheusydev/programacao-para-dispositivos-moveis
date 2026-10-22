@@ -30,4 +30,23 @@ class BancoHelper {
     final db = await _openBanco();
     return db.insert(tabela, contato.toMap());
   }
+
+  // READ - lista todos os contatos
+  static Future<List<Contato>> listar() async {
+    final db = await _openBanco();
+    final linhas = await db.query(tabela, orderBy: 'nome COLLATE NOCASE');
+    return linhas.map((l) => Contato.fromMap(l)).toList();
+  }
+
+  // READ - consulta contatos pelo nome ou e-mail.
+  static Future<List<Contato>> buscar(String termo) async {
+    final db = await _openBanco();
+    final linhas = await db.query(
+      tabela,
+      where: 'nome LIKE ? OR email LIKE ?',
+      whereArgs: ['%$termo%', '%$termo%'],
+      orderBy: 'nome COLLATE NOCASE',
+    );
+    return linhas.map((l) => Contato.fromMap(l)).toList();
+  }
 }
