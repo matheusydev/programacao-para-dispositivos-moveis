@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -20,7 +21,7 @@ class TelaMapa extends StatefulWidget {
 class _TelaMapaState extends State<TelaMapa> {
   late GoogleMapController mapController;
 
-  static const LatLng _centro = LatLng(-5.0892, -42.8016);
+  static const LatLng _centro = LatLng(-5.064, -42.821);
 
   final Set<Marker> _marcadores = pontosTuristicos
       .map((ponto) => Marker(
@@ -41,7 +42,7 @@ class _TelaMapaState extends State<TelaMapa> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Google Maps'),
+        title: const Text('Guia Turístico de Teresina'),
         backgroundColor: Colors.green[700],
       ),
       body: GoogleMap(
@@ -49,7 +50,7 @@ class _TelaMapaState extends State<TelaMapa> {
         markers: _marcadores,
         initialCameraPosition: const CameraPosition(
           target: _centro,
-          zoom: 14,
+          zoom: 13,
         ),
       ),
     );
