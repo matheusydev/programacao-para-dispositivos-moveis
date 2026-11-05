@@ -13,6 +13,7 @@ Todas as atividades foram desenvolvidas em **Flutter** com **Dart** e **Material
 | 3 | [Navegação entre Páginas](atividade_3/) | Duas páginas que trocam entre si, primeiro com `push`/`pop` e depois com rotas nomeadas. | `Navigator.push`, `Navigator.pop`, `MaterialPageRoute`, `routes`, `pushNamed` |
 | 4 | [Gasolina x Álcool](atividade_4/) | Calculadora que indica qual combustível compensa mais a partir dos preços informados. | `TextField`, `TextEditingController`, `AnimatedContainer`, `Image.network` |
 | 5 | [Agenda de Contatos](atividade_5/) | Agenda com cadastro, busca, edição e exclusão de contatos salvos em banco SQLite local. | `sqflite`, CRUD, `AlertDialog`, modelo com `toMap`/`fromMap` |
+| 6 | [Guia Turístico de Teresina](atividade_6/) | Mapa de Teresina com marcadores nos principais pontos turísticos da cidade. | `google_maps_flutter`, `Marker`, `InfoWindow`, chave de API |
 
 ## Estrutura do repositório
 
@@ -23,6 +24,7 @@ programacao-para-dispositivos-moveis/
 ├── atividade_3/   # Navegação entre Páginas
 ├── atividade_4/   # Gasolina x Álcool
 ├── atividade_5/   # Agenda de Contatos com SqFlite
+├── atividade_6/   # Guia Turístico de Teresina com Google Maps
 └── README.md
 ```
 
@@ -32,6 +34,7 @@ programacao-para-dispositivos-moveis/
 - [Dart](https://dart.dev/) `^3.13.4`
 - Material Design 3
 - [sqflite](https://pub.dev/packages/sqflite) e [sqflite_common_ffi](https://pub.dev/packages/sqflite_common_ffi) (atividade 5)
+- [google_maps_flutter](https://pub.dev/packages/google_maps_flutter) (atividade 6)
 
 ## Pré-requisitos
 
@@ -49,7 +52,7 @@ flutter doctor
 1. Clone o repositório:
 
    ```bash
-   git clone https://github.com/<seu-usuario>/programacao-para-dispositivos-moveis.git
+   git clone https://github.com/matheusydev/programacao-para-dispositivos-moveis.git
    cd programacao-para-dispositivos-moveis
    ```
 
@@ -72,12 +75,15 @@ flutter doctor
 |-----------|:-------:|:---:|:-------:|
 | 1 a 4     | ✅ | ✅ | — |
 | 5         | ✅ | ❌ | ✅ |
+| 6         | ✅ | ✅ | ❌ |
 
 A atividade 5 usa SQLite, que não funciona no navegador. No Windows, rode com:
 
 ```bash
 flutter run -d windows
 ```
+
+A atividade 6 utiliza o Google Maps por meio do pacote `google_maps_flutter`, exigindo a configuração de uma chave de API do Google Maps nas plataformas utilizadas.
 
 ## Autor
 
