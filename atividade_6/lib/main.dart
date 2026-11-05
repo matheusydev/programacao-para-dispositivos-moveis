@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+import 'pontos.dart';
+
 void main() {
   runApp(const MaterialApp(
     debugShowCheckedModeBanner: false,
@@ -20,6 +22,17 @@ class _TelaMapaState extends State<TelaMapa> {
 
   static const LatLng _centro = LatLng(-5.0892, -42.8016);
 
+  final Set<Marker> _marcadores = pontosTuristicos
+      .map((ponto) => Marker(
+            markerId: MarkerId(ponto.nome),
+            position: ponto.posicao,
+            infoWindow: InfoWindow(
+              title: ponto.nome,
+              snippet: ponto.descricao,
+            ),
+          ))
+      .toSet();
+
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
   }
@@ -33,6 +46,7 @@ class _TelaMapaState extends State<TelaMapa> {
       ),
       body: GoogleMap(
         onMapCreated: _onMapCreated,
+        markers: _marcadores,
         initialCameraPosition: const CameraPosition(
           target: _centro,
           zoom: 14,
