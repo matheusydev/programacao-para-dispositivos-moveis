@@ -2,9 +2,13 @@
 
 Projeto da disciplina **Programação para Dispositivos Móveis** do IFPI, ministrada pelo professor Otílio Paulo. O objetivo é cadastrar, consultar, editar e excluir contatos com identificador, nome e e-mail.
 
-## Etapa atual
+## Funcionalidades
 
-O app Web usa Material 3 e inicia o Firebase antes de abrir a agenda. A autenticação anônima fornece um UID para que o Firestore isole os contatos por usuário. O formulário e as operações CRUD entram na próxima etapa.
+- Cadastro com validação de nome e e-mail.
+- Listagem em ordem de nome, com atualização automática pelo Firestore.
+- Edição em um formulário preenchido com os dados atuais, preservando o ID.
+- Exclusão com confirmação e mensagens de sucesso ou erro.
+- Autenticação anônima para restringir os contatos ao titular do UID.
 
 ## Tecnologias
 
@@ -16,7 +20,10 @@ O app Web usa Material 3 e inicia o Firebase antes de abrir a agenda. A autentic
 
 - [main.dart](lib/main.dart) inicia o aplicativo.
 - [app.dart](lib/app.dart) define o tema e a página inicial.
-- [contatos_page.dart](lib/pages/contatos_page.dart) define a tela principal.
+- [contatos_page.dart](lib/pages/contatos_page.dart) lista os contatos e confirma exclusões.
+- [contato_form_page.dart](lib/pages/contato_form_page.dart) valida o cadastro e a edição.
+- [contato.dart](lib/models/contato.dart) representa os dados de um contato.
+- [contatos_service.dart](lib/services/contatos_service.dart) acessa a coleção do usuário no Firestore.
 
 - [firebase_setup.dart](lib/firebase_setup.dart) inicializa o Firebase e a sessão anônima.
 - [firestore.rules](firestore.rules) restringe os contatos ao titular da sessão.
@@ -77,10 +84,12 @@ flutter pub get
 flutter run -d chrome --dart-define=FIREBASE_EMULATORS=true
 ~~~
 
-O projeto de demonstração usa apenas os emuladores e dispensa uma conta do Firebase. A abertura da agenda demonstra a inicialização e a autenticação. A verificação do CRUD pela interface depende da próxima etapa.
+O projeto de demonstração usa apenas os emuladores e dispensa uma conta do Firebase.
 
-Para verificar a autenticação e as regras de isolamento entre usuários, mantenha os emuladores abertos e rode:
+## Testes
+
+Execute `flutter test` para verificar o fluxo da interface com um serviço em memória. Para executar também o teste de CRUD e de regras do Firestore via HTTP, mantenha os emuladores de autenticação e banco ativos e rode:
 
 ~~~bash
-flutter test --dart-define=FIREBASE_EMULATORS=true test/firebase_emulator_test.dart
+flutter test --dart-define=FIREBASE_EMULATORS=true
 ~~~

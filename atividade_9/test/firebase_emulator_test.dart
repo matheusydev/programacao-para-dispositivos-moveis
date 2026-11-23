@@ -47,11 +47,14 @@ void main() {
     final url =
         'http://127.0.0.1:8080/v1/projects/demo-atividade-9/databases/(default)'
         '/documents/usuarios/${titular['localId']}/contatos/$id';
-    Map<String, Object?> contato(String identificador) => {
+    Map<String, Object?> contato(
+      String identificador, {
+      String email = 'contato@example.com',
+    }) => {
       'fields': {
         'id': {'stringValue': identificador},
         'nome': {'stringValue': 'Contato exemplo'},
-        'email': {'stringValue': 'contato@example.com'},
+        'email': {'stringValue': email},
       },
     };
 
@@ -76,6 +79,19 @@ void main() {
         HttpStatus.forbidden,
       );
       expect((await requisicao('GET', url)).status, HttpStatus.forbidden);
+      final editado = await requisicao(
+        'PATCH',
+        url,
+        token: token,
+        dados: contato(id, email: 'atualizado@example.com'),
+      );
+      expect(editado.status, HttpStatus.ok);
+      final consulta = await requisicao('GET', url, token: token);
+      expect(consulta.status, HttpStatus.ok);
+      final campos = (jsonDecode(consulta.corpo) as Map)['fields'] as Map;
+      expect(campos['id']['stringValue'], id);
+      expect(campos['email']['stringValue'], 'atualizado@example.com');
+
       final idAlterado = await requisicao(
         'PATCH',
         url,
@@ -89,5 +105,7 @@ void main() {
         HttpStatus.ok,
       );
     }
+    final excluido = await requisicao('GET', url, token: token);
+    expect(excluido.status, HttpStatus.notFound);
   }, skip: !const bool.fromEnvironment('FIREBASE_EMULATORS'));
 }

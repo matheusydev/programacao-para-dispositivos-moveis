@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'pages/contatos_page.dart';
+import 'services/contatos_service.dart';
 
 class ContatosApp extends StatelessWidget {
   const ContatosApp({required this.inicializacao, super.key});
@@ -42,7 +45,12 @@ class ContatosApp extends StatelessWidget {
               ),
             );
           }
-          return const ContatosPage();
+          return ContatosPage(
+            servico: ContatosFirestore(
+              FirebaseFirestore.instance,
+              FirebaseAuth.instance.currentUser!.uid,
+            ),
+          );
         },
       ),
     );
