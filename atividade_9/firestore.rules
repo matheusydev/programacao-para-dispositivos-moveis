@@ -1,0 +1,22 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /usuarios/{uid}/contatos/{id} {
+      function titular() {
+        return request.auth != null && request.auth.uid == uid;
+      }
+
+      function contatoValido() {
+        let contato = request.resource.data;
+        return contato.keys().hasAll(['id', 'nome', 'email'])
+          && contato.keys().hasOnly(['id', 'nome', 'email'])
+          && contato.id == id
+          && contato.nome is string && contato.nome.size() > 0
+          && contato.email is string && contato.email.size() > 0;
+      }
+
+      allow read, delete: if titular();
+      allow create, update: if titular() && contatoValido();
+    }
+  }
+}

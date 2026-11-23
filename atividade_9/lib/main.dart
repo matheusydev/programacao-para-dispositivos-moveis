@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'app.dart';
+import 'firebase_setup.dart';
 
 void main() {
-  runApp(const ContatosApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(ContatosApp(inicializacao: iniciarFirebase()));
 }
