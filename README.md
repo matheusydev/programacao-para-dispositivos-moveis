@@ -25,6 +25,9 @@ programacao-para-dispositivos-moveis/
 ├── atividade_4/   # Gasolina x Álcool
 ├── atividade_5/   # Agenda de Contatos com SqFlite
 ├── atividade_6/   # Guia Turístico de Teresina com Google Maps
+├── atividade_7/   # Mapa com marcadores personalizados
+├── atividade_8/
+├── atividade_pratica/   # Discovery
 └── README.md
 ```
 
@@ -83,7 +86,7 @@ A atividade 5 usa SQLite, que não funciona no navegador. No Windows, rode com:
 flutter run -d windows
 ```
 
-A atividade 6 utiliza o Google Maps por meio do pacote `google_maps_flutter`, exigindo a configuração de uma chave de API do Google Maps nas plataformas utilizadas.
+Os projetos da [atividade 6](atividade_6/#configuração-da-api), da [atividade 7](atividade_7/#configuração-da-api) e da [atividade prática](atividade_pratica/#configuração-da-api) usam o Google Maps e precisam de uma chave configurada localmente.
 
 ## Autor
 

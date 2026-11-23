@@ -46,3 +46,6 @@ app.*.map.json
 
 # Widget Preview related
 .widget_preview/
+
+/web/maps_config.js
+/ios/Flutter/MapsSecrets.xcconfig

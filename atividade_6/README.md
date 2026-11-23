@@ -18,21 +18,13 @@ Ao tocar em um marcador, aparece um balão com o nome e uma breve descrição do
 
 ## Configuração da API
 
-A chave de API foi criada no [Google Cloud Console](https://console.cloud.google.com/), com três APIs ativadas:
+Ative no Google Cloud a API da plataforma em que vai executar o app. Os arquivos locais da tabela são ignorados pelo Git.
 
-- Maps SDK for Android
-- Maps SDK for iOS
-- Maps JavaScript API
-
-A chave está restrita a essas três APIs e foi adicionada em cada plataforma:
-
-| Plataforma | Arquivo | Como a chave é informada |
+| Plataforma | Configuração local | API no Google Cloud |
 |---|---|---|
-| Android | `android/app/src/main/AndroidManifest.xml` | `<meta-data>` dentro de `<application>` |
-| iOS | `ios/Runner/AppDelegate.swift` | `GMSServices.provideAPIKey(...)` antes de iniciar o Flutter |
-| Web | `web/index.html` | Script do Google Maps no `<head>` |
-
-O slide da aula mostra o `AppDelegate.m` em Objective-C. Como os projetos Flutter atuais usam Swift, a configuração do iOS foi feita no `AppDelegate.swift`.
+| Android | Defina a variável de ambiente `MAPS_API_KEY` ou adicione `MAPS_API_KEY=SUA_CHAVE` a `android/local.properties`. | Maps SDK for Android |
+| Web | Copie `web/maps_config.example.js` para `web/maps_config.js` e substitua `COLOQUE_SUA_CHAVE_AQUI`. | Maps JavaScript API |
+| iOS | Crie `ios/Flutter/MapsSecrets.xcconfig` com `MAPS_API_KEY = SUA_CHAVE`. | Maps SDK for iOS |
 
 ## Estrutura do código
 
