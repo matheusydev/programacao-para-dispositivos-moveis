@@ -14,6 +14,9 @@ Todas as atividades foram desenvolvidas em **Flutter** com **Dart** e **Material
 | 4 | [Gasolina x Álcool](atividade_4/) | Calculadora que indica qual combustível compensa mais a partir dos preços informados. | `TextField`, `TextEditingController`, `AnimatedContainer`, `Image.network` |
 | 5 | [Agenda de Contatos](atividade_5/) | Agenda com cadastro, busca, edição e exclusão de contatos salvos em banco SQLite local. | `sqflite`, CRUD, `AlertDialog`, modelo com `toMap`/`fromMap` |
 | 6 | [Guia Turístico de Teresina](atividade_6/) | Mapa de Teresina com marcadores nos principais pontos turísticos da cidade. | `google_maps_flutter`, `Marker`, `InfoWindow`, chave de API |
+| 7 | [Mapa com Ícone Personalizado](atividade_7/) | Exibe pontos turísticos de Teresina com uma imagem personalizada nos marcadores. | `google_maps_flutter`, `Marker`, assets |
+| 8 | [Estados do Tempo](atividade_8/) | Mostra ilustrações e descrições de tempo nublado, chuvoso e ensolarado em abas. | `TabBar`, `TabBarView`, assets |
+| Prática | [Discovery](atividade_pratica/README.md) | Organiza lugares por categoria, permite buscar por nome e mostra locais próximos no mapa. | `BottomNavigationBar`, navegação, `google_maps_flutter` |
 
 ## Estrutura do repositório
 
@@ -26,7 +29,7 @@ programacao-para-dispositivos-moveis/
 ├── atividade_5/   # Agenda de Contatos com SqFlite
 ├── atividade_6/   # Guia Turístico de Teresina com Google Maps
 ├── atividade_7/   # Mapa com marcadores personalizados
-├── atividade_8/
+├── atividade_8/   # Estados do Tempo
 ├── atividade_pratica/   # Discovery
 └── README.md
 ```
@@ -37,7 +40,7 @@ programacao-para-dispositivos-moveis/
 - [Dart](https://dart.dev/) `^3.13.4`
 - Material Design 3
 - [sqflite](https://pub.dev/packages/sqflite) e [sqflite_common_ffi](https://pub.dev/packages/sqflite_common_ffi) (atividade 5)
-- [google_maps_flutter](https://pub.dev/packages/google_maps_flutter) (atividade 6)
+- [google_maps_flutter](https://pub.dev/packages/google_maps_flutter) (atividades 6 e 7 e atividade prática)
 
 ## Pré-requisitos
 
@@ -79,6 +82,9 @@ flutter doctor
 | 1 a 4     | ✅ | ✅ | — |
 | 5         | ✅ | ❌ | ✅ |
 | 6         | ✅ | ✅ | ❌ |
+| 7         | ✅ | ✅ | ❌ |
+| 8         | ✅ | ✅ | ✅ |
+| Prática   | ✅ | ✅ | ❌ |
 
 A atividade 5 usa SQLite, que não funciona no navegador. No Windows, rode com:
 
