@@ -24,7 +24,6 @@ Projeto da disciplina **Programação para Dispositivos Móveis** do IFPI, minis
 - [contato_form_page.dart](lib/pages/contato_form_page.dart) valida o cadastro e a edição.
 - [contato.dart](lib/models/contato.dart) representa os dados de um contato.
 - [contatos_service.dart](lib/services/contatos_service.dart) acessa a coleção do usuário no Firestore.
-
 - [firebase_setup.dart](lib/firebase_setup.dart) inicializa o Firebase e a sessão anônima.
 - [firestore.rules](firestore.rules) restringe os contatos ao titular da sessão.
 
@@ -93,3 +92,9 @@ Execute `flutter test` para verificar o fluxo da interface com um serviço em me
 ~~~bash
 flutter test --dart-define=FIREBASE_EMULATORS=true
 ~~~
+
+O CRUD também foi verificado pela interface no Chrome com a Firebase Emulator Suite. Para repetir a verificação manual, cadastre um contato de exemplo, confira a listagem, edite o nome e confirme a exclusão. O teste local usa dados fictícios.
+
+## Entrega
+
+O [relatório em PDF](atividade_9_relatorio.pdf) reúne o código-fonte escrito para o aplicativo, a configuração das dependências, as regras do Firestore e capturas reais do CRUD no Chrome com os emuladores locais.

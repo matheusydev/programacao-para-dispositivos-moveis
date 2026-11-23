@@ -16,6 +16,7 @@ Todas as atividades foram desenvolvidas em **Flutter** com **Dart** e **Material
 | 6 | [Guia Turístico de Teresina](atividade_6/) | Mapa de Teresina com marcadores nos principais pontos turísticos da cidade. | `google_maps_flutter`, `Marker`, `InfoWindow`, chave de API |
 | 7 | [Mapa com Ícone Personalizado](atividade_7/) | Exibe pontos turísticos de Teresina com uma imagem personalizada nos marcadores. | `google_maps_flutter`, `Marker`, assets |
 | 8 | [Estados do Tempo](atividade_8/) | Mostra ilustrações e descrições de tempo nublado, chuvoso e ensolarado em abas. | `TabBar`, `TabBarView`, assets |
+| 9 | [CRUD de Contatos com Firebase](atividade_9/) | Agenda com cadastro, consulta, edição e exclusão de contatos no Cloud Firestore. | `firebase_core`, `firebase_auth`, `cloud_firestore`, regras de acesso |
 | Prática | [Discovery](atividade_pratica/README.md) | Organiza lugares por categoria, permite buscar por nome e mostra locais próximos no mapa. | `BottomNavigationBar`, navegação, `google_maps_flutter` |
 
 ## Estrutura do repositório
@@ -30,6 +31,7 @@ programacao-para-dispositivos-moveis/
 ├── atividade_6/   # Guia Turístico de Teresina com Google Maps
 ├── atividade_7/   # Mapa com marcadores personalizados
 ├── atividade_8/   # Estados do Tempo
+├── atividade_9/   # CRUD de Contatos com Firebase
 ├── atividade_pratica/   # Discovery
 └── README.md
 ```
@@ -41,6 +43,7 @@ programacao-para-dispositivos-moveis/
 - Material Design 3
 - [sqflite](https://pub.dev/packages/sqflite) e [sqflite_common_ffi](https://pub.dev/packages/sqflite_common_ffi) (atividade 5)
 - [google_maps_flutter](https://pub.dev/packages/google_maps_flutter) (atividades 6 e 7 e atividade prática)
+- `firebase_core`, `firebase_auth` e `cloud_firestore` (atividade 9)
 
 ## Pré-requisitos
 
@@ -84,6 +87,7 @@ flutter doctor
 | 6         | ✅ | ✅ | ❌ |
 | 7         | ✅ | ✅ | ❌ |
 | 8         | ✅ | ✅ | ✅ |
+| 9         | — | ✅ | — |
 | Prática   | ✅ | ✅ | ❌ |
 
 A atividade 5 usa SQLite, que não funciona no navegador. No Windows, rode com:
@@ -101,6 +105,8 @@ cd atividade_pratica
 flutter pub get
 flutter run -d chrome
 ```
+
+A [Atividade 9](atividade_9/README.md) roda no Chrome com um projeto Firebase configurado ou com os emuladores locais. O README da atividade traz os comandos e o relatório em PDF.
 
 ## Autor
 
