@@ -92,7 +92,15 @@ A atividade 5 usa SQLite, que não funciona no navegador. No Windows, rode com:
 flutter run -d windows
 ```
 
-Os projetos da [atividade 6](atividade_6/#configuração-da-api), da [atividade 7](atividade_7/#configuração-da-api) e da [atividade prática](atividade_pratica/#configuração-da-api) usam o Google Maps e precisam de uma chave configurada localmente.
+Os projetos da [atividade 6](atividade_6/README.md#configuração-da-api), da [atividade 7](atividade_7/README.md#configuração-da-api) e da [atividade prática](atividade_pratica/README.md#configuração-da-api) usam o Google Maps e precisam de uma chave configurada localmente.
+
+Para executar o Discovery na Web, use a pasta `atividade_pratica/` diretamente a partir da raiz do repositório.
+
+```bash
+cd atividade_pratica
+flutter pub get
+flutter run -d chrome
+```
 
 ## Autor
 
